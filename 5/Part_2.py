@@ -7,48 +7,48 @@ def convert_through_range(range: np.array, value_ranges):
     for r in range:
         new_value_ranges = []
         for v in value_ranges:
-            print(f"range: {r}")
-            print(f"value: {v}")
+            #print(f"range: {r}")
+            #print(f"value: {v}")
             if r[1] <= v[0] < r[2] + r[1]:
-                print("start in range")
+                #print("start in range")
                 # the start is in the range
                 if v[1] >= r[2] + r[1]:
-                    print("end not in range")
+                    #print("end not in range")
                     # the end is above in the range
                     diff = v[0] - r[1]
                     new_ranges.append((r[0] + diff, r[0] + r[2]))
                     new_value_ranges.append((r[2] + r[1], v[1]))
                 else:
 
-                    print("end in range")
+                    #print("end in range")
                     # the end is in the range
                     diff = v[0] - r[1]
                     new_ranges.append((r[0] + diff, r[0] + diff + v[1] - v[0]))
             else:
-                print("start not in range")
+                #print("start not in range")
                 # the start is not in the range
                 if v[1] >= r[2] + r[1]:
-                    print("end not in range (above)")
+                    #print("end not in range (above)")
                     # the end is above in the range
                     if v[0] < r[1]:
-                        print("start not in range (below)")
+                        #print("start not in range (below)")
                         # the start is below in the range
                         new_ranges.append((r[0], r[0] + r[2]))
                         new_value_ranges.append((r[2] + r[1], v[1]))
                         new_value_ranges.append((v[0], r[1]))
                     else:
-                        print("start not in range (above)")
+                        #print("start not in range (above)")
                         # the start is above in the range
                         new_value_ranges.append(v)
                 elif v[1] <= r[1]:
-                    print("end not in range (below)")
+                    #print("end not in range (below)")
                     new_value_ranges.append(v)
                 else:
-                    print("end in range")
+                    #print("end in range")
                     # the end is in the range, the start must be below
                     new_ranges.append((r[0], r[0] + r[1] - v[1]))
                     new_value_ranges.append((v[0], r[1]))
-            print("----")
+            #print("----")
         value_ranges = new_value_ranges.copy()
 
     return new_ranges + value_ranges
