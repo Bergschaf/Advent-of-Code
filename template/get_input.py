@@ -1,7 +1,17 @@
 import requests
 import os
+import datetime
 
-day_number = 5
+# Get the day number
+date = datetime.datetime.now().day
+day_number = None
+if date != day_number and day_number is not None:
+    print(f"Today is not day {day_number}, it is day {date}.")
+    x = input("Continue? (y/n)")
+    if x != "y":
+        exit()
+else:
+    day_number = date
 
 overwrite = True
 input_file = "input.txt"
@@ -34,3 +44,5 @@ print(example[:-1])
 x = input("Verify...")
 with open("example.txt", "w") as f:
     f.write(example[:-1])
+
+print("DAY: ", day_number)
