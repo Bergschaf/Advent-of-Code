@@ -1,7 +1,7 @@
 from utils import recursive_split, all_different
 
-order = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"]
-rev_order = list(reversed(order))
+ORDER = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"]
+rev_order = list(reversed(ORDER))
 def five_of_kind(inp):
     if len(set(inp)) == 1:
         return True
@@ -51,13 +51,19 @@ def one_pair(inp):
 def tr(inp):
     return True
 
-def order_to_digit(inp):
-    digit = 0
-    value = 5
-    for i in inp:
-        digit += (rev_order.index(i) + 1) * pow(13,value)
-        value -= 1
-    return digit
+def sort(lst: list, i):
+    if len(lst) <= 1:
+        return lst
+    else:
+        ret = [[] for _ in range(len(ORDER))]
+        for l in lst:
+            ret[rev_order.index(l[0][i])].append(l)
+        if i < 5:
+            ret = [sort(x, i+1) for x in ret]
+        r = []
+        for x in ret:
+            r += x
+        return r
 
 def main(input: str):
     inp = recursive_split(input, "\n", " ")
@@ -70,13 +76,11 @@ def main(input: str):
                 order[i].append(input)
                 break
     for i in range(7):
-        order[i].sort(key=lambda x: order_to_digit(x[0]))
+        order[i] = sort(order[i], 0)
 
     out = 0
     multiplier = 1
     print(order)
-    print(order_to_digit("KK677"))
-    print(order_to_digit("KTJJT"))
     for i in range(6,-1,-1):
         for j in range(len(order[i])):
             out += order[i][j][1] * multiplier
