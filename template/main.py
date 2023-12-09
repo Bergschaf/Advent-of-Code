@@ -12,6 +12,7 @@ if __name__ == '__main__':
             print(f"Example Output basst: {example_output}")
         else:
             print(f"example output basst nicht: {example_output} ;Target: {example_target}")
+            exit()
     else:
         print(f"Example Output: {example_output}")
 
