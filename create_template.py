@@ -1,10 +1,14 @@
 import os
 import shutil
 
-day_number = 9
+day = 9
+year = 2022
 
-if os.path.exists(f"{day_number}"):
-    print("Folder already exists.")
+if not os.path.exists(f"{year}"):
+    os.mkdir(f"{year}")
+
+if os.path.exists(f"{year}/{day}"):
+    print("Folder already exists")
     exit()
 
-shutil.copytree("template", f"{day_number}")
+shutil.copytree("template", f"{year}/{day}")

@@ -14,3 +14,9 @@ def recursive_split(string, *args):
     else:
         split = string.split(args[0])
         return [recursive_split(s, *args[1:]) for s in split]
+
+def lower_alphabet():
+    return "abcdefghijklmnopqrstuvwxyz"
+
+def upper_alphabet():
+    return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

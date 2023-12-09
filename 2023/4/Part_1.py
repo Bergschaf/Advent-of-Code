@@ -1,4 +1,4 @@
-with open("input.txt","r") as f:
+with open("input.txt", "r") as f:
     total_points = 0
     for line in f:
         line = line.split(":")[1]

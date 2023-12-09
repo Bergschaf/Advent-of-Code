@@ -1,4 +1,4 @@
-with open("input.txt","r") as f:
+with open("input.txt", "r") as f:
     input = f.readlines()
     gears_sum = 0
     possible_gears = [[[] for j in range(len(input[1]))] for i in range(len(input))]
