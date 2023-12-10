@@ -20,3 +20,9 @@ def lower_alphabet():
 
 def upper_alphabet():
     return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+def last_int(string):
+    """
+    Get the last integer in a string, the last integer is separated by a space
+    """
+    return int(string.split()[-1])

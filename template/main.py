@@ -1,3 +1,5 @@
+from utils import *
+
 def main(input: str):
     pass
 

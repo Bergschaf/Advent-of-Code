@@ -1,7 +1,7 @@
 import os
 import shutil
 
-day = 9
+day = 11
 year = 2022
 
 if not os.path.exists(f"{year}"):
