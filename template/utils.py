@@ -1,6 +1,5 @@
 from typing import Callable, List, Tuple
 
-
 def all_different(lst: list):
     """
     Check if all elements in the list are different
