@@ -1,3 +1,9 @@
-x = {1,2,3,4}
-y = {1,2,5}
-print(x.pop())
+import ast
+
+x = "[1,2,3,[1,12],2]"
+print(ast.literal_eval(x))
+
+
+print((1,2,3,5)[1:])
+
+print((1,2,3,5)[:4])

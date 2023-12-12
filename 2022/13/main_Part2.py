@@ -31,14 +31,16 @@ def main(input: str):
     packets = input.split("\n\n")
     packets = [[ast.literal_eval(x) for x in packet.split("\n")] for packet in packets]
     right_order = []
-    for i,packet in enumerate(packets):
-        if compare(packet[0], packet[1]):
-            right_order.append(i+ 1)
-    return sum(right_order)
+    flat_packets = [item for sublist in packets for item in sublist] + [[[2]], [[6]]]
+    right_order= mergesort(flat_packets, compare)
+
+    i1 = right_order.index([[2]]) + 1
+    i2 = right_order.index([[6]])+ 1
+    return i1 * i2
 
 
 if __name__ == '__main__':
-    example_target = 13
+    example_target = 140
     with open("example.txt", "r") as f:
         example_output = main(f.read())
 
