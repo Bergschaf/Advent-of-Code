@@ -45,6 +45,40 @@ def last_int(string):
     return int(string.split()[-1])
 
 
+def merge(lst1, lst2, compare):
+    """
+    Merge two lists with a compare function
+    """
+    lst = []
+    i = 0
+    j = 0
+    while i < len(lst1) and j < len(lst2):
+        if compare(lst1[i], lst2[j]):
+            lst.append(lst1[i])
+            i += 1
+        else:
+            lst.append(lst2[j])
+            j += 1
+    if i < len(lst1):
+        lst.extend(lst1[i:])
+    if j < len(lst2):
+        lst.extend(lst2[j:])
+    return lst
+
+def mergesort(lst: list, compare):
+    """
+    Sort a list with mergesort
+    """
+    if len(lst) <= 1:
+        return lst
+    else:
+        mid = len(lst) // 2
+        left = mergesort(lst[:mid], compare)
+        right = mergesort(lst[mid:], compare)
+        return merge(left, right, compare)
+
+
+
 def pos_in_2d_list(lst: List, item):
     """
     Get the position of an item in a 2d list
