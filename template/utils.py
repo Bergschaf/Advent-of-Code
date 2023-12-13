@@ -17,6 +17,16 @@ def recursive_split(string, *args):
         split = string.split(args[0])
         return [recursive_split(s, *args[1:]) for s in split]
 
+def parse_input(input:str, splitters, value_positions, to_int=True):
+    out = []
+    last = 0
+    for i in range(len(input)):
+        if input[i] in splitters:
+            out.append(input[last:i])
+            last = i + 1
+    out.append(input[last:])
+    return [int(out[x]) if to_int else out[x] for x in range(len(out)) if x in value_positions]
+
 
 def lower_alphabet():
     return "abcdefghijklmnopqrstuvwxyz"
