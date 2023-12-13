@@ -21,6 +21,7 @@ def main(input: str):
     vert = []
     hor = []
     for grid in input:
+        g = grid.copy()
         old_v = None
         old_h = None
         for x in range(1, len(grid)):
@@ -31,7 +32,6 @@ def main(input: str):
             if is_vertical_line(y, grid):
                 old_v = y
                 break
-        print(old_v, old_h)
         for i in range(len(grid)):
             for j in range(len(grid[0])):
                 if grid[i][j] == "#":
@@ -40,19 +40,15 @@ def main(input: str):
                     grid[i][j] = "#"
                 v = None
                 h = None
-                zz = 0
                 for x in range(1, len(grid)):
                     if is_horizontal_line(x, grid):
                         h = x * 100
-                        zz = 1
                         break
                 for y in range(1, len(grid[0])):
                     if is_vertical_line(y, grid):
-                        zz += 1
                         v = y
                         break
-                if zz == 2:
-                    print("error", (h, v,",", old_h, old_v))
+
                 if grid[i][j] == "#":
                     grid[i][j] = "."
                 else:
@@ -67,17 +63,17 @@ def main(input: str):
                     if h != old_h:
                         hor.append(h)
                         break
-                if zz== 2:
-                    print("-----------------------xxx")
 
             else:
                 continue
             break
         else:
+            print(old_v, old_h, h, v)
             print("----------------------------")
 
     return sum(vert) + sum(hor)
     # 23236
+    #26608
 
 
 if __name__ == '__main__':
