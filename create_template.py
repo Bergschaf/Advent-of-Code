@@ -1,8 +1,8 @@
 import os
 import shutil
 
-day = 15
-year = 2022
+day = 14
+year = 2023
 
 if not os.path.exists(f"{year}"):
     os.mkdir(f"{year}")
