@@ -110,6 +110,22 @@ def all_pos_in_2d_list(lst: List, item):
     return pos
 
 
+def transpos(lst: List[List]):
+    """
+    Transpose a 2d list
+    """
+    return [list(x) for x in zip(*lst)]
+
+def clone(lst: List):
+    """
+    Clone a n dimensional list
+    """
+    if type(lst[0]) is list:
+        return [clone(x) for x in lst]
+    else:
+        return lst.copy()
+
+
 class BFS:
     point_type = Tuple[int, int]
     graph_type = List[List[int]]
