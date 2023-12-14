@@ -28,6 +28,19 @@ def parse_input(input:str, splitters, value_positions, to_int=True):
     return [int(out[x]) if to_int else out[x] for x in range(len(out)) if x in value_positions]
 
 
+def parse_grid(input: str):
+    """
+    Parse a grid from a string
+    """
+    return [list(x) for x in input.split("\n")]
+
+def parse_grids(input: str):
+    """
+    Parse a grid from a string
+    """
+    return [parse_grid(grid) for grid in input.split("\n\n")]
+
+
 def lower_alphabet():
     return "abcdefghijklmnopqrstuvwxyz"
 
