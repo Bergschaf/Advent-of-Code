@@ -8,24 +8,26 @@ DIRECTIONS = {
     "R": (1, 0)
 }
 def main(input: str):
-    input = [x.split() for x in input.split("\n") if x != ""]
-    input = [(x[0],int(x[1])) for x in input]
+    input = [x.split()[-1][2:-1] for x in input.split("\n") if x != ""]
     points = [(0,0)]
     boundary = 0
-    for direction, distance in input:
+    for x in input:
+        distance = int("0x" + x[:-1], 0)
+        dir_code = ("R","D","L","U")
+        direction = dir_code[int(x[-1])]
         points.append((points[-1][0] + DIRECTIONS[direction][0] * distance, points[-1][1] + DIRECTIONS[direction][1] * distance))
         boundary += distance
 
     print(points)
 
-    left = sum(points[i][0] * points[i+1][1] for i in range(len(points)-1))
-    right = sum(points[i][1] * points[i+1][0] for i in range(len(points)-1))
+    left = sum(points[i-1][0] * points[i][1] for i in range(len(points)))
+    right = sum(points[i-1][1] * points[i][0] for i in range(len(points)))
     return 0.5 * abs(left - right) + boundary // 2 + 1
 
 
 
 if __name__ == '__main__':
-    example_target = 62
+    example_target = 952408144115
     with open("example.txt", "r") as f:
         example_output = main(f.read())
 
