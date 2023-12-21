@@ -26,7 +26,7 @@ def main(input: str):
         workflow_functions[name] = (functions, default)
 
     def num_combinations_in_num_list(nums):
-        return reduce(lambda x, y: x * y, [x[1] - x[0] for x in nums])
+        return reduce(lambda x, y: x * y, [x[1] - x[0] + 1 for x in nums])
 
     def run_workflow(name, nums):
         # nums [(xmin, xmax), ...]
