@@ -18,7 +18,7 @@ def main(input: str):
         functions = []
         for f in function:
             condition, res = f.split(":")
-            res = True if res == "A" else False
+            res = (True if res == "A" else False) if res in "AR" else res
             variable = condition[0]
             lam = eval(f"lambda {variable}: {condition}")
             functions.append((variable, lam, res))
@@ -35,16 +35,40 @@ def main(input: str):
             elif variable == "s":
                 var = s
             if f(var):
-                return res
+                if type(res) == bool:
+                    return res
+                return run_workflow(res, x, m, a, s)
+
         if type(default) == bool:
             return default
         return run_workflow(default, x, m, a, s)
 
     accepted = 0
     for part in parts:
-        part.replace("=", ":")
-        print(part)
-        part_dict = ast.literal_eval(part
+        part = part[1:-1].split(",")
+        nums = []
+        for p in part:
+            nums.append(int(p.split("=")[1]))
+        if run_workflow("in", *nums):
+            accepted += sum(nums)
+    return accepted
 
 
+if __name__ == '__main__':
+    example_target = 19114
+    with open("example.txt", "r") as f:
+        example_output = main(f.read())
 
+    if example_target is not None:
+        if example_output == example_target:
+            print(f"Example Output basst: {example_output}")
+        else:
+            print(f"example output basst nicht: {example_output} ;Target: {example_target}")
+            exit()
+    else:
+        print(f"Example Output: {example_output}")
+
+    with open("input.txt", "r") as f:
+        input_output = main(f.read())
+
+    print(f"Output: {input_output}")
