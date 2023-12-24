@@ -1,3 +1,6 @@
-import ast
-x = 0
-print(False * 100)
+
+x =0
+for i in range(26501365):
+    x += 1
+
+print(x)
