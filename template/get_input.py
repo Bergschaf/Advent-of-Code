@@ -16,7 +16,7 @@ else:
 
 overwrite = True
 input_file = "input.txt"
-cookie = "53616c7465645f5f1b07966036555a11490d8df7e05f43f23469a35fb851c9436d4619c6d599d2b0e89e8a95b5d288c5b253db0c0a62f6bdbea6d3159f84446e"
+cookie = "53616c7465645f5fd9c524ce69ca731f6ab6e310fa4419ad53ca11fbe3466660f0121bb1e9a686562e4c33f31baf687e0e5676487af2d05f465489b03e1f081e"
 if not os.path.exists(input_file) or overwrite:
     page = requests.get(f"https://adventofcode.com/{year}/day/{day}/input", cookies={"session": cookie}).text
 
