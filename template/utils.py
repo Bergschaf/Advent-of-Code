@@ -1,4 +1,38 @@
+import re
 from typing import Callable, List, Tuple
+
+class DefaultList(list):
+    """
+    A list that returns a default value if the index is out of bounds (also if the index is negative)
+    (or it fails (for negative and to large indices) if the fail parameter is set to True)
+    """
+    def __init__(self, default, *args, fail=False, setItemFail=False, **kwargs):
+        self.default = default
+        self.fail = fail
+        self.setItemFail = setItemFail
+        super().__init__(*args, **kwargs)
+
+    def __getitem__(self, key):
+        if key >= len(self) or key < 0:
+            if self.fail:
+                raise Exception("Index out of bounds")
+            return self.default
+        return super().__getitem__(key)
+
+    def __setitem__(self, key, value):
+        if key >= len(self) or key < 0:
+            if self.setItemFail:
+                raise Exception("Index out of bounds")
+            return
+        super().__setitem__(key, value)
+
+def parse_numbers(input: str, delimiter=" "):
+    """
+    Parse numbers from a string
+    """
+    return [[int(i) for i in x.split(delimiter) if i.isdigit()] for x in input.splitlines()]
+
+
 
 def split_all_lines(input: list[str], delimiter=" "):
     """
@@ -11,6 +45,12 @@ def transpose(lst: List[List]):
     Transpose a 2d list
     """
     return [list(x) for x in zip(*lst)]
+
+
+def parse_2D_grid_to_Defaultlist(input: str,default=None):
+    return DefaultList(default, [DefaultList(default,x) for x in input.splitlines()])
+
+
 
 def all_different(lst: list):
     """
@@ -135,11 +175,6 @@ def all_pos_in_2d_list(lst: List, item):
     return pos
 
 
-def transpose(lst: List[List]):
-    """
-    Transpose a 2d list
-    """
-    return [list(x) for x in zip(*lst)]
 
 def clone(lst: List):
     """

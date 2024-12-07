@@ -4,7 +4,7 @@ import datetime
 
 # Get the day number
 date = datetime.datetime.now().day
-day = os.getcwd().split("/")[-1]
+day = int(os.getcwd().split("/")[-1])
 year = os.getcwd().split("/")[-2]
 if date != day and day is not None:
     print(f"Today is not day {day}, it is day {date}.")
