@@ -13,10 +13,23 @@ class DefaultList(list):
         super().__init__(*args, **kwargs)
 
     def __getitem__(self, key):
+        if type(key) is list or type(key) is tuple:
+            key2 = key[1]
+            key1 = key[0]
+            if key1 >= len(self) or key1 < 0:
+                if self.fail:
+                    raise Exception("Index out of bounds")
+                return self.default
+            x = super().__getitem__(key1)
+            if type(x) is list:
+                return x
+            return x.__getitem__(key2)
+
         if key >= len(self) or key < 0:
             if self.fail:
                 raise Exception("Index out of bounds")
             return self.default
+
         return super().__getitem__(key)
 
     def __setitem__(self, key, value):
@@ -33,7 +46,6 @@ def parse_numbers(input: str, delimiter=" "):
     return [[int(i) for i in x.split(delimiter) if i.isdigit()] for x in input.splitlines()]
 
 
-
 def split_all_lines(input: list[str], delimiter=" "):
     """
     Split all lines in a list by a delimiter
@@ -47,9 +59,8 @@ def transpose(lst: List[List]):
     return [list(x) for x in zip(*lst)]
 
 
-def parse_2D_grid_to_Defaultlist(input: str,default=None):
-    return DefaultList(default, [DefaultList(default,x) for x in input.splitlines()])
-
+def parse_2D_grid_to_Defaultlist(input: str,default=None, to_int=False):
+    return DefaultList(default, [DefaultList(default,x if not to_int else [int(y) for y in x]) for x in input.splitlines()])
 
 
 def all_different(lst: list):
