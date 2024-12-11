@@ -1,8 +1,8 @@
 import os
 import shutil
 
-day = 11
-year = 2024
+day = int(input("Day: "))
+year = 2021 #  TODO change
 
 if not os.path.exists(f"{year}"):
     os.mkdir(f"{year}")
