@@ -1,7 +1,6 @@
 import re
-
-from OpenGL.GL.NV.vertex_program4 import glVertexAttribIPointerEXT
-
+import sympy
+from sympy.abc import n, m, c
 from utils import *
 
 #parse_2D_grid_to_Defaultlist
@@ -34,7 +33,7 @@ def main1(input: str):
             tokens += min_tokens
     return tokens
 
-def main(input: str):
+def main2(input: str):
     input = input.splitlines()
     games = []
     for i in range(0, len(input), 4):
@@ -72,6 +71,24 @@ def main(input: str):
 
     return tokens
 
+def main(input : str):
+    # sympy version
+    input = input.splitlines()
+    games = []
+    for i in range(0, len(input), 4):
+        b1 = re.findall(r"\d+", input[i])
+        b2 = re.findall(r"\d+", input[i + 1])
+        pr = re.findall(r"\d+", input[i + 2])
+        b1 = int(b1[0]), int(b1[1])
+        b2 = int(b2[0]), int(b2[1])
+        pr = int(pr[0]) + 10000000000000, int(pr[1]) + 10000000000000
+        games.append((b1, b2, pr))
+    tokens = 0
+    for game in games:
+        res = sympy.solve([game[0][0] * n + game[1][0] * m - game[2][0], game[0][1] * n + game[1][1] * m - game[2][1]], (n, m))
+        if float(res[n]).is_integer() and float(res[m]).is_integer():
+            tokens += res[m] + res[n] * 3
+    return tokens
 
 if __name__ == '__main__':
     example_target = None
