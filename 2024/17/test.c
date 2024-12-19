@@ -7,10 +7,9 @@ long pow2(int n) {
 
 int main() {
 
-
-	long A = 1000;
+	long int A = 1000;
 	while (A != 0){
-	    long out  = ((((A % 8) ^ 5) ^ 6) ^ ((A / (pow2((A % 8))))) % 8);
+	    long int out  = ((((A % 8) ^ 5) ^ 6) ^ ((A / (pow2((A % 8))))) % 8);
 	    printf("%ld\n", out);
 	    A = (A / pow2(((A % 8) ^ 5) ^ 6));
 

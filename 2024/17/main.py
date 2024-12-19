@@ -81,7 +81,7 @@ def run_program(registers, program):
         registers = opcode[op](registers, c)
         if registers[3] == previous_program_counter:
             registers[3] += 2
-    return
+    return OUT
 
 
 def main(input: str, example=False):
